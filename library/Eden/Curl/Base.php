@@ -292,7 +292,7 @@ class Base extends CoreBase
     /**
      * Send the curl off 
      *
-     * @return Eden\Curl\Curl
+     * @return Eden\Curl\Base
      */
     public function send() 
     {
@@ -318,7 +318,7 @@ class Base extends CoreBase
      * from misconfigured end points or vice versa. 
      * When default cURL fails, try a custom GET instead
      *
-     * @return Eden\Curl\Curl
+     * @return Eden\Curl\Base
      */
     public function setCustomGet() 
     {
@@ -331,7 +331,7 @@ class Base extends CoreBase
      * from misconfigured end points or vice versa. 
      * When default cURL fails, try a custom POST instead
      *
-     * @return Eden\Curl\Curl
+     * @return Eden\Curl\Base
      */
     public function setCustomPost() 
     {
@@ -344,7 +344,7 @@ class Base extends CoreBase
      * from misconfigured end points or vice versa. 
      * When default cURL fails, try a custom PUT instead
      *
-     * @return Eden\Curl\Curl
+     * @return Eden\Curl\Base
      */
     public function setCustomPut() 
     {
@@ -357,7 +357,7 @@ class Base extends CoreBase
      * from misconfigured end points or vice versa. 
      * When default cURL fails, try a custom DELETE instead
      *
-     * @return Eden\Curl\Curl
+     * @return Eden\Curl\Base
      */
     public function setCustomDelete() 
     {
@@ -371,7 +371,7 @@ class Base extends CoreBase
      * does not handle
      *
      * @param *string|array
-     * @return Eden\Curl\Curl
+     * @return Eden\Curl\Base
      */
     public function setPostFields($fields) 
     {
@@ -388,7 +388,7 @@ class Base extends CoreBase
      *
      * @param *array|string
      * @param scalar|null
-     * @return Eden\Curl\Curl
+     * @return Eden\Curl\Base
      */
     public function setHeaders($key, $value = null) 
     {
@@ -412,7 +412,7 @@ class Base extends CoreBase
      *
      * @param *array|string
      * @param scalar
-     * @return Eden\Curl\Curl
+     * @return Eden\Curl\Base
      */
     public function setUrlParameter($key, $value = null) 
     {
@@ -434,7 +434,7 @@ class Base extends CoreBase
      * Sets CURLOPT_SSL_VERIFYHOST
      *
      * @param bool
-     * @return Eden\Curl\Curl
+     * @return Eden\Curl\Base
      */
     public function verifyHost($on = true) 
     {
@@ -448,7 +448,7 @@ class Base extends CoreBase
      * Sets CURLOPT_SSL_VERIFYPEER
      *
      * @param bool
-     * @return Eden\Curl\Curl
+     * @return Eden\Curl\Base
      */
     public function verifyPeer($on = true) 
     {
@@ -461,7 +461,7 @@ class Base extends CoreBase
     /**
      * Adds extra headers to the cURL request
      *
-     * @return Eden\Curl\Curl
+     * @return Eden\Curl\Base
      */
     protected function addHeaders() 
     {
@@ -476,7 +476,7 @@ class Base extends CoreBase
     /**
      * Adds extra post parameters to the cURL request
      *
-     * @return Eden\Curl\Curl
+     * @return Eden\Curl\Base
      */
     protected function addParameters() 
     {
