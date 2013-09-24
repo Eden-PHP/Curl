@@ -1,5 +1,5 @@
 {
-    "name": "eden-php/curl",
+    "name": "eden/curl",
     "type": "library",
     "description": "Eden cURL component",
     "keywords": ["eden", "library"],
