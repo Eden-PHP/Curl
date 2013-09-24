@@ -9,7 +9,7 @@
  * distributed with this package.
  */
 
-class Eden_Tests_Curl_CurlTest extends \PHPUnit_Framework_TestCase {
+class Eden_Curl_Tests_Curl_CurlTest extends \PHPUnit_Framework_TestCase {
 
     public function testGetDomDocumentResponse() {
 //        $response = eden('curl')
