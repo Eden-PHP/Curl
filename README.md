@@ -121,7 +121,7 @@ When we think about anything API related, chances are you are working with PHP's
 
 To sweeten this class further we also added several response formats to support the many use cases usually related to cURL.
 
-** Figure 2. Response Format**
+**Figure 2. Response Format**
 
 	$curl->getResponse();                // sends request off and returns the response
 	$curl->getJsonResponse();            // sends request off and returns the response JSON parsed 
@@ -131,7 +131,7 @@ To sweeten this class further we also added several response formats to support 
 
 Taken from our Facebook library, an example of how to call Facebook directly using raw cURL is found in `Figure 3`.
 
-** Figure 3. Facebook cURL**
+**Figure 3. Facebook cURL**
 
 	eden('curl')
 		->setUrl('https://graph.facebook.com/christian.blanquera')
