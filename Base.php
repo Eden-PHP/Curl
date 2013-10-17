@@ -28,6 +28,7 @@ class Base extends CoreBase
     const DELETE = 'DELETE';
     const GET = 'GET';
     const POST = 'POST';
+    const PATCH = 'PATCH';
 
     protected $options = array();
     protected $meta = array();
@@ -336,6 +337,19 @@ class Base extends CoreBase
     public function setCustomPost() 
     {
         $this->setCustomRequest(self::POST);
+        return $this;
+    }
+    
+    /**
+     * Curl has problems handling custom request types
+     * from misconfigured end points or vice versa. 
+     * When default cURL fails, try a custom PATCH instead
+     *
+     * @return Eden\Curl\Base
+     */
+    public function setCustomPatch() 
+    {
+        $this->setCustomRequest(self::PATCH);
         return $this;
     }
 
