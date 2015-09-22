@@ -9,8 +9,6 @@
 
 namespace Eden\Curl;
 
-use Eden\Core\Base as CoreBase;
-
 /**
  * The base class for all classes wishing to integrate with Eden.
  * Extending this class will allow your methods to seemlessly be
@@ -21,9 +19,8 @@ use Eden\Core\Base as CoreBase;
  * @package Curl
  * @author Christian Blanquera cblanquera@openovate.com
  */
-class Base extends CoreBase
+class Index extends Base
 {
-
 	const PUT = 'PUT';
     const DELETE = 'DELETE';
     const GET = 'GET';
@@ -93,7 +90,7 @@ class Base extends CoreBase
             }
 
             if(isset(self::$setCallbackKeys[$method])) {
-                Argument::i()->virtual($name, $args, 1, 'array', 'string');
+                Argument::i()->virtual($name, $args, 1, 'array', 'string', 'callable');
                 $key = self::$setCallbackKeys[$method];
                 $this->options[$key] = $args[0];
 
