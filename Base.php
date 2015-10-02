@@ -555,7 +555,6 @@ class Base extends CoreBase
 
     protected static $setIntegerKeys = array(
         'BufferSize' => CURLOPT_BUFFERSIZE,
-        'ClosePolicy' => CURLOPT_CLOSEPOLICY,
         'ConnectTimeout' => CURLOPT_CONNECTTIMEOUT,
         'ConnectTimeoutMs' => CURLOPT_CONNECTTIMEOUT_MS,
         'DnsCacheTimeout' => CURLOPT_DNS_CACHE_TIMEOUT,
