@@ -21,7 +21,7 @@ namespace Eden\Curl;
  */
 class Index extends Base
 {
-	const PUT = 'PUT';
+    const PUT = 'PUT';
     const DELETE = 'DELETE';
     const GET = 'GET';
     const POST = 'POST';
@@ -39,18 +39,18 @@ class Index extends Base
      * @param *array
      * @return object
      */
-    public function __call($name, $args) 
+    public function __call($name, $args)
     {
         Argument::i()
-			//argument 1 must be a string
-            ->test(1, 'string') 
-			//argument 2 must be an array
-            ->test(2, 'array'); 
+            //argument 1 must be a string
+            ->test(1, 'string')
+            //argument 2 must be an array
+            ->test(2, 'array');
 
-        if(strpos($name, 'set') === 0) {
+        if (strpos($name, 'set') === 0) {
             $method = substr($name, 3);
 
-            if(isset(self::$setBoolKeys[$method])) {
+            if (isset(self::$setBoolKeys[$method])) {
                 Argument::i()->virtual($name, $args, 1, 'bool');
                 $key = self::$setBoolKeys[$method];
                 $this->options[$key] = $args[0];
@@ -58,7 +58,7 @@ class Index extends Base
                 return $this;
             }
 
-            if(isset(self::$setIntegerKeys[$method])) {
+            if (isset(self::$setIntegerKeys[$method])) {
                 Argument::i()->virtual($name, $args, 1, 'int');
                 $key = self::$setIntegerKeys[$method];
                 $this->options[$key] = $args[0];
@@ -66,7 +66,7 @@ class Index extends Base
                 return $this;
             }
 
-            if(isset(self::$setStringKeys[$method])) {
+            if (isset(self::$setStringKeys[$method])) {
                 Argument::i()->virtual($name, $args, 1, 'string');
                 $key = self::$setStringKeys[$method];
                 $this->options[$key] = $args[0];
@@ -74,7 +74,7 @@ class Index extends Base
                 return $this;
             }
 
-            if(isset(self::$setArrayKeys[$method])) {
+            if (isset(self::$setArrayKeys[$method])) {
                 Argument::i()->virtual($name, $args, 1, 'array');
                 $key = self::$setArrayKeys[$method];
                 $this->options[$key] = $args[0];
@@ -82,14 +82,14 @@ class Index extends Base
                 return $this;
             }
 
-            if(isset(self::$setFileKeys[$method])) {
+            if (isset(self::$setFileKeys[$method])) {
                 $key = self::$setFileKeys[$method];
                 $this->options[$key] = $args[0];
 
                 return $this;
             }
 
-            if(isset(self::$setCallbackKeys[$method])) {
+            if (isset(self::$setCallbackKeys[$method])) {
                 Argument::i()->virtual($name, $args, 1, 'array', 'string', 'callable');
                 $key = self::$setCallbackKeys[$method];
                 $this->options[$key] = $args[0];
@@ -107,7 +107,7 @@ class Index extends Base
      *
      * @return DOMDOcument
      */
-    public function getDomDocumentResponse() 
+    public function getDomDocumentResponse()
     {
         $this->meta['response'] = $this->getResponse();
         $xml = new DOMDocument();
@@ -122,7 +122,7 @@ class Index extends Base
      * @param bool
      * @return array
      */
-    public function getJsonResponse($assoc = true) 
+    public function getJsonResponse($assoc = true)
     {
         //argument 1 must be a boolean
         Argument::i()->test(1, 'bool');
@@ -137,12 +137,12 @@ class Index extends Base
      * @param string|null
      * @return array
      */
-    public function getMeta($key = null) 
+    public function getMeta($key = null)
     {
         //argument 1 must be a string or null
         Argument::i()->test(1, 'string', 'null');
 
-        if(isset($this->meta[$key])) {
+        if (isset($this->meta[$key])) {
             return $this->meta[$key];
         }
 
@@ -155,7 +155,7 @@ class Index extends Base
      *
      * @return array
      */
-    public function getQueryResponse() 
+    public function getQueryResponse()
     {
         $this->meta['response'] = $this->getResponse();
         parse_str($this->meta['response'], $response);
@@ -167,7 +167,7 @@ class Index extends Base
      *
      * @return string
      */
-    public function getResponse() 
+    public function getResponse()
     {
         $curl = curl_init();
 
@@ -194,7 +194,7 @@ class Index extends Base
      *
      * @return SimpleXmlElement
      */
-    public function getSimpleXmlResponse() 
+    public function getSimpleXmlResponse()
     {
         $this->meta['response'] = $this->getResponse();
         return simplexml_load_string($this->meta['response']);
@@ -206,7 +206,7 @@ class Index extends Base
      * @param *scalar|null|bool
      * @return bool
      */
-    public function offsetExists($offset) 
+    public function offsetExists($offset)
     {
         //argument 1 must be scalar, null or bool
         Argument::i()->test(1, 'scalar', 'null', 'bool');
@@ -220,7 +220,7 @@ class Index extends Base
      * @param *scalar|null|bool
      * @return bool
      */
-    public function offsetGet($offset) 
+    public function offsetGet($offset)
     {
         //argument 1 must be scalar, null or bool
         Argument::i()->test(1, 'scalar', 'null', 'bool');
@@ -235,38 +235,38 @@ class Index extends Base
      * @param mixed
      * @return void
      */
-    public function offsetSet($offset, $value) 
+    public function offsetSet($offset, $value)
     {
         //argument 1 must be scalar, null or bool
         Argument::i()->test(1, 'scalar', 'null', 'bool');
 
         if (!is_null($offset)) {
-            if(in_array($offset, $this->setBoolKeys)) {
+            if (in_array($offset, $this->setBoolKeys)) {
                 $method = array_search($offset, $this->setBoolKeys);
                 $this->call('set'.$method, array($value));
             }
 
-            if(in_array($offset, $this->setIntegerKeys)) {
+            if (in_array($offset, $this->setIntegerKeys)) {
                 $method = array_search($offset, $this->setIntegerKeys);
                 $this->call('set'.$method, array($value));
             }
 
-            if(in_array($offset, $this->setStringKeys)) {
+            if (in_array($offset, $this->setStringKeys)) {
                 $method = array_search($offset, $this->setStringKeys);
                 $this->call('set'.$method, array($value));
             }
 
-            if(in_array($offset, $this->setArrayKeys)) {
+            if (in_array($offset, $this->setArrayKeys)) {
                 $method = array_search($offset, $this->setArrayKeys);
                 $this->call('set'.$method, array($value));
             }
 
-            if(in_array($offset, $this->setFileKeys)) {
+            if (in_array($offset, $this->setFileKeys)) {
                 $method = array_search($offset, $this->setFileKeys);
                 $this->call('set'.$method, array($value));
             }
 
-            if(in_array($offset, $this->setCallbackKeys)) {
+            if (in_array($offset, $this->setCallbackKeys)) {
                 $method = array_search($offset, $this->setCallbackKeys);
                 $this->call('set'.$method, array($value));
             }
@@ -279,7 +279,7 @@ class Index extends Base
      * @param *scalar|null|bool
      * @return bool
      */
-    public function offsetUnset($offset) 
+    public function offsetUnset($offset)
     {
         //argument 1 must be scalar, null or bool
         Argument::i()->test(1, 'scalar', 'null', 'bool');
@@ -288,11 +288,11 @@ class Index extends Base
     }
 
     /**
-     * Send the curl off 
+     * Send the curl off
      *
      * @return Eden\Curl\Base
      */
-    public function send() 
+    public function send()
     {
         $curl = curl_init();
 
@@ -313,12 +313,12 @@ class Index extends Base
 
     /**
      * Curl has problems handling custom request types
-     * from misconfigured end points or vice versa. 
+     * from misconfigured end points or vice versa.
      * When default cURL fails, try a custom GET instead
      *
      * @return Eden\Curl\Base
      */
-    public function setCustomGet() 
+    public function setCustomGet()
     {
         $this->setCustomRequest(self::GET);
         return $this;
@@ -326,12 +326,12 @@ class Index extends Base
 
     /**
      * Curl has problems handling custom request types
-     * from misconfigured end points or vice versa. 
+     * from misconfigured end points or vice versa.
      * When default cURL fails, try a custom POST instead
      *
      * @return Eden\Curl\Base
      */
-    public function setCustomPost() 
+    public function setCustomPost()
     {
         $this->setCustomRequest(self::POST);
         return $this;
@@ -339,12 +339,12 @@ class Index extends Base
     
     /**
      * Curl has problems handling custom request types
-     * from misconfigured end points or vice versa. 
+     * from misconfigured end points or vice versa.
      * When default cURL fails, try a custom PATCH instead
      *
      * @return Eden\Curl\Base
      */
-    public function setCustomPatch() 
+    public function setCustomPatch()
     {
         $this->setCustomRequest(self::PATCH);
         return $this;
@@ -352,12 +352,12 @@ class Index extends Base
 
     /**
      * Curl has problems handling custom request types
-     * from misconfigured end points or vice versa. 
+     * from misconfigured end points or vice versa.
      * When default cURL fails, try a custom PUT instead
      *
      * @return Eden\Curl\Base
      */
-    public function setCustomPut() 
+    public function setCustomPut()
     {
         $this->setCustomRequest(self::PUT);
         return $this;
@@ -365,12 +365,12 @@ class Index extends Base
 
     /**
      * Curl has problems handling custom request types
-     * from misconfigured end points or vice versa. 
+     * from misconfigured end points or vice versa.
      * When default cURL fails, try a custom DELETE instead
      *
      * @return Eden\Curl\Base
      */
-    public function setCustomDelete() 
+    public function setCustomDelete()
     {
         $this->setCustomRequest(self::DELETE);
         return $this;
@@ -378,13 +378,13 @@ class Index extends Base
 
     /**
      * CURLOPT_POSTFIELDS accepts array and string
-     * arguments, this is a special case that __call 
+     * arguments, this is a special case that __call
      * does not handle
      *
      * @param *string|array
      * @return Eden\Curl\Base
      */
-    public function setPostFields($fields) 
+    public function setPostFields($fields)
     {
         //argument 1 must be a string or array
         Argument::i()->test(1, 'array', 'string');
@@ -401,15 +401,15 @@ class Index extends Base
      * @param scalar|null
      * @return Eden\Curl\Base
      */
-    public function setHeaders($key, $value = null) 
+    public function setHeaders($key, $value = null)
     {
         Argument::i()
-			//argument 1 must be a string or array
-            ->test(1, 'array', 'string') 
-			//argument 2 must be scalar or null
-            ->test(2, 'scalar','null');  
+            //argument 1 must be a string or array
+            ->test(1, 'array', 'string')
+            //argument 2 must be scalar or null
+            ->test(2, 'scalar', 'null');
 
-        if(is_array($key)) {
+        if (is_array($key)) {
             $this->headers = $key;
             return $this;
         }
@@ -425,15 +425,15 @@ class Index extends Base
      * @param scalar
      * @return Eden\Curl\Base
      */
-    public function setUrlParameter($key, $value = null) 
+    public function setUrlParameter($key, $value = null)
     {
         Argument::i()
-			//argument 1 must be a string or array
-            ->test(1, 'array', 'string') 
-			//argument 2 must be scalar
-            ->test(2, 'scalar');         
+            //argument 1 must be a string or array
+            ->test(1, 'array', 'string')
+            //argument 2 must be scalar
+            ->test(2, 'scalar');
 
-        if(is_array($key)) {
+        if (is_array($key)) {
             $this->param = $key;
             return $this;
         }
@@ -447,7 +447,7 @@ class Index extends Base
      * @param bool
      * @return Eden\Curl\Base
      */
-    public function verifyHost($on = true) 
+    public function verifyHost($on = true)
     {
         Argument::i()->test(1, 'bool'); //argument 1 must be a boolean
 
@@ -461,7 +461,7 @@ class Index extends Base
      * @param bool
      * @return Eden\Curl\Base
      */
-    public function verifyPeer($on = true) 
+    public function verifyPeer($on = true)
     {
         Argument::i()->test(1, 'bool'); //argument 1 must be a boolean
 
@@ -474,9 +474,9 @@ class Index extends Base
      *
      * @return Eden\Curl\Base
      */
-    protected function addHeaders() 
+    protected function addHeaders()
     {
-        if(empty($this->headers)) {
+        if (empty($this->headers)) {
             return $this;
         }
 
@@ -489,27 +489,27 @@ class Index extends Base
      *
      * @return Eden\Curl\Base
      */
-    protected function addParameters() 
+    protected function addParameters()
     {
-        if(empty($this->params)) {
+        if (empty($this->params)) {
             return $this;
         }
 
         $params = http_build_query($this->params);
-        if($this->options[CURLOPT_POST]) {
+        if ($this->options[CURLOPT_POST]) {
             $this->options[CURLOPT_POSTFIELDS] = $params;
             return $this;
         }
 
         //if there is a question mark in the url
-        if(strpos($this->options[CURLOPT_URL], '?') === false) {
+        if (strpos($this->options[CURLOPT_URL], '?') === false) {
             //add the question mark
             $params = '?'.$params;
         //else if the question mark is not at the end
-        } else if(substr($this->options[CURLOPT_URL], -1, 1) != '?') {
+        } else if (substr($this->options[CURLOPT_URL], -1, 1) != '?') {
             //append the parameters to the end
             //with the other parameters
-            $params = '&'.$params; 
+            $params = '&'.$params;
         }
 
         //append the parameters
@@ -622,5 +622,4 @@ class Index extends Base
         'HeaderFunction' => CURLOPT_HEADERFUNCTION,
         'ReadFunction' => CURLOPT_READFUNCTION,
         'WriteFunction' => CURLOPT_WRITEFUNCTION);
-
 }
