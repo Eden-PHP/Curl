@@ -16,6 +16,6 @@
 		"eden/core": "4.x-dev"
     },
     "autoload": {
-         "psr-4": { "Eden\\Curl\\": "/src" }
+         "psr-4": { "Eden\\Curl\\": "src/" }
     }
 }
