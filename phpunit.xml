@@ -9,11 +9,11 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="Tests/bootstrap.php"
+         bootstrap="test/bootstrap.php"
 >
   <testsuites>
     <testsuite name="Eden Curl Test Suite">
-      <directory>./Tests/Curl</directory>
+      <file>test/Index.php</file>
     </testsuite>
   </testsuites>
 

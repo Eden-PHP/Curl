@@ -1,3 +1,5 @@
+[![Build Status](https://api.travis-ci.org/Eden-PHP/Curl.png)](https://travis-ci.org/Eden-PHP/Curl)
+===
 # cURL
 
 When we think about anything API related, chances are you are working with PHP's cURL wrapper. *Eden* again wraps all the functionality in cURL into a class which in turn gives cURL the same flexibility and chainability as all *Eden* classes.
