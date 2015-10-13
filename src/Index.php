@@ -1,9 +1,9 @@
 <?php //-->
-/*
- * This file is part of the Curl package of the Eden PHP Library.
- * (c) 2013-2014 Openovate Labs
+/**
+ * This file is part of the Eden PHP Library.
+ * (c) 2014-2016 Openovate Labs
  *
- * Copyright and license information can be found at LICENSE
+ * Copyright and license information can be found at LICENSE.txt
  * distributed with this package.
  */
 
@@ -15,29 +15,65 @@ namespace Eden\Curl;
  * overloaded and overrided as well as provide some basic class
  * loading patterns.
  *
- * @vendor Eden
- * @package Curl
- * @author Christian Blanquera cblanquera@openovate.com
+ * @vendor   Eden
+ * @package  Curl
+ * @author   Christian Blanquera <cblanquera@openovate.com>
+ * @standard PSR-2
  */
 class Index extends Base
 {
+    /**
+     * @const string PUT Send method type
+     */
     const PUT = 'PUT';
+       
+    /**
+     * @const string DELETE Send method type
+     */
     const DELETE = 'DELETE';
+       
+    /**
+     * @const string GET Send method type
+     */
     const GET = 'GET';
+       
+    /**
+     * @const string POST Send method type
+     */
     const POST = 'POST';
+       
+    /**
+     * @const string PATCH Send method type
+     */
     const PATCH = 'PATCH';
-
+       
+    /**
+     * @var array $options List of cURL options
+     */
     protected $options = array();
+       
+    /**
+     * @var array $meta Stored meta data
+     */
     protected $meta = array();
+       
+    /**
+     * @var array $query List of URL queries
+     */
     protected $query = array();
+       
+    /**
+     * @var array $headers List of headers
+     */
     protected $headers = array();
 
     /**
      * Determines if the method is an actual curl option
      *
-     * @param *string
-     * @param *array
-     * @return object
+     * @param *string $name Name of method
+     * @param *array  $args Arguments to pass
+     *
+     * @return mixed
      */
     public function __call($name, $args)
     {
@@ -119,7 +155,8 @@ class Index extends Base
      * Send the curl off and returns the results
      * parsed as JSON
      *
-     * @param bool
+     * @param bool $assoc To use associative array instead
+     *
      * @return array
      */
     public function getJsonResponse($assoc = true)
@@ -134,7 +171,8 @@ class Index extends Base
     /**
      * Returns the meta of the last call
      *
-     * @param string|null
+     * @param string|null $key The name of the key in meta
+     *
      * @return array
      */
     public function getMeta($key = null)
@@ -203,7 +241,8 @@ class Index extends Base
     /**
      * isset using the ArrayAccess interface
      *
-     * @param *scalar|null|bool
+     * @param *scalar|null|bool $offset The key to test if exists
+     *
      * @return bool
      */
     public function offsetExists($offset)
@@ -217,8 +256,9 @@ class Index extends Base
     /**
      * returns data using the ArrayAccess interface
      *
-     * @param *scalar|null|bool
-     * @return bool
+     * @param *scalar|null|bool $offset The key to get
+     *
+     * @return mixed
      */
     public function offsetGet($offset)
     {
@@ -233,6 +273,7 @@ class Index extends Base
      *
      * @param *scalar|null|bool
      * @param mixed
+     *
      * @return void
      */
     public function offsetSet($offset, $value)
@@ -276,8 +317,9 @@ class Index extends Base
     /**
      * unsets using the ArrayAccess interface
      *
-     * @param *scalar|null|bool
-     * @return bool
+     * @param *scalar|null|bool $offset The key to unset
+     *
+     * @return void
      */
     public function offsetUnset($offset)
     {
@@ -290,7 +332,7 @@ class Index extends Base
     /**
      * Send the curl off
      *
-     * @return Eden\Curl\Base
+     * @return Eden\Curl\Index
      */
     public function send()
     {
@@ -316,7 +358,7 @@ class Index extends Base
      * from misconfigured end points or vice versa.
      * When default cURL fails, try a custom GET instead
      *
-     * @return Eden\Curl\Base
+     * @return Eden\Curl\Index
      */
     public function setCustomGet()
     {
@@ -329,7 +371,7 @@ class Index extends Base
      * from misconfigured end points or vice versa.
      * When default cURL fails, try a custom POST instead
      *
-     * @return Eden\Curl\Base
+     * @return Eden\Curl\Index
      */
     public function setCustomPost()
     {
@@ -342,7 +384,7 @@ class Index extends Base
      * from misconfigured end points or vice versa.
      * When default cURL fails, try a custom PATCH instead
      *
-     * @return Eden\Curl\Base
+     * @return Eden\Curl\Index
      */
     public function setCustomPatch()
     {
@@ -355,7 +397,7 @@ class Index extends Base
      * from misconfigured end points or vice versa.
      * When default cURL fails, try a custom PUT instead
      *
-     * @return Eden\Curl\Base
+     * @return Eden\Curl\Index
      */
     public function setCustomPut()
     {
@@ -368,7 +410,7 @@ class Index extends Base
      * from misconfigured end points or vice versa.
      * When default cURL fails, try a custom DELETE instead
      *
-     * @return Eden\Curl\Base
+     * @return Eden\Curl\Index
      */
     public function setCustomDelete()
     {
@@ -381,8 +423,9 @@ class Index extends Base
      * arguments, this is a special case that __call
      * does not handle
      *
-     * @param *string|array
-     * @return Eden\Curl\Base
+     * @param *string|array $fields the post data to send
+     *
+     * @return Eden\Curl\Index
      */
     public function setPostFields($fields)
     {
@@ -397,9 +440,10 @@ class Index extends Base
     /**
      * Sets request headers
      *
-     * @param *array|string
-     * @param scalar|null
-     * @return Eden\Curl\Base
+     * @param *array|string $key   The header name
+     * @param scalar|null   $value The header value
+     *
+     * @return Eden\Curl\Index
      */
     public function setHeaders($key, $value = null)
     {
@@ -421,9 +465,10 @@ class Index extends Base
     /**
      * Sets url parameter
      *
-     * @param *array|string
-     * @param scalar
-     * @return Eden\Curl\Base
+     * @param *array|string $key   The parameter name
+     * @param scalar        $value The parameter value
+     *
+     * @return Eden\Curl\Index
      */
     public function setUrlParameter($key, $value = null)
     {
@@ -444,8 +489,9 @@ class Index extends Base
     /**
      * Sets CURLOPT_SSL_VERIFYHOST
      *
-     * @param bool
-     * @return Eden\Curl\Base
+     * @param bool $on Flag to verify host
+     *
+     * @return Eden\Curl\Index
      */
     public function verifyHost($on = true)
     {
@@ -458,8 +504,9 @@ class Index extends Base
     /**
      * Sets CURLOPT_SSL_VERIFYPEER
      *
-     * @param bool
-     * @return Eden\Curl\Base
+     * @param bool $on Flag to verify peer
+     *
+     * @return Eden\Curl\Index
      */
     public function verifyPeer($on = true)
     {
@@ -472,7 +519,7 @@ class Index extends Base
     /**
      * Adds extra headers to the cURL request
      *
-     * @return Eden\Curl\Base
+     * @return Eden\Curl\Index
      */
     protected function addHeaders()
     {
@@ -487,7 +534,7 @@ class Index extends Base
     /**
      * Adds extra post parameters to the cURL request
      *
-     * @return Eden\Curl\Base
+     * @return Eden\Curl\Index
      */
     protected function addParameters()
     {
@@ -518,6 +565,9 @@ class Index extends Base
         return $this;
     }
 
+    /**
+     * @var array $setBoolKeys cURL options accepting a bool
+     */
     protected static $setBoolKeys = array(
         'AutoReferer' => CURLOPT_AUTOREFERER,
         'BinaryTransfer' => CURLOPT_BINARYTRANSFER,
@@ -550,6 +600,9 @@ class Index extends Base
         'Upload' => CURLOPT_UPLOAD,
         'Verbose' => CURLOPT_VERBOSE);
 
+    /**
+     * @var array $setIntegerKeys cURL options accepting an integer
+     */
     protected static $setIntegerKeys = array(
         'BufferSize' => CURLOPT_BUFFERSIZE,
         'ConnectTimeout' => CURLOPT_CONNECTTIMEOUT,
@@ -575,6 +628,9 @@ class Index extends Base
         'TimeoutMs' => CURLOPT_TIMEOUT_MS,
         'TimeValue' => CURLOPT_TIMEVALUE);
 
+    /**
+     * @var array $setStringKeys cURL options accepting string values
+     */
     protected static $setStringKeys = array(
         'CaInfo' => CURLOPT_CAINFO,
         'CaPath' => CURLOPT_CAPATH,
@@ -606,18 +662,27 @@ class Index extends Base
         'UserAgent' => CURLOPT_USERAGENT,
         'UserPwd' => CURLOPT_USERPWD);
 
+    /**
+     * @var array $setArrayKeys cURL options accepting an array
+     */
     protected static $setArrayKeys = array(
         'Http200Aliases' => CURLOPT_HTTP200ALIASES,
         'HttpHeader' => CURLOPT_HTTPHEADER,
         'PostQuote' => CURLOPT_POSTQUOTE,
         'Quote' => CURLOPT_QUOTE);
 
+    /**
+     * @var array $setFileKeys cURL options accepting a file pointer
+     */
     protected static $setFileKeys = array(
         'File' => CURLOPT_FILE,
         'InFile' => CURLOPT_INFILE,
         'StdErr' => CURLOPT_STDERR,
         'WriteHeader' => CURLOPT_WRITEHEADER);
 
+    /**
+     * @var array $setCallbackKeys cURL options accepting a function
+     */
     protected static $setCallbackKeys = array(
         'HeaderFunction' => CURLOPT_HEADERFUNCTION,
         'ReadFunction' => CURLOPT_READFUNCTION,
